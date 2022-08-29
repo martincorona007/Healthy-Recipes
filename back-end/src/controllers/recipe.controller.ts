@@ -28,8 +28,10 @@ export const getRecipes : RequestHandler = async (req,res) => {
 }
 export const removeRecipe :  RequestHandler = async (req,res) => {
   try {
-    await Recipe.findByIdAndDelete(req.params.id);
+    const recipeFound = await Recipe.findByIdAndDelete(req.params.id);
+    if(!recipeFound) return res.status(404).json({message: "Recipe not found"})  
     return res.status(200).json({message: "Recipe removed"})  
+
   } catch (e: any) {
     console.log("ERR ",e)
     return res.json(e);
