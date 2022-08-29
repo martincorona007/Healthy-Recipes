@@ -3,7 +3,8 @@ import * as authController from '../controllers/auth.controller';
 
 const router = Router();
 
-//create account user
-router.post('/api/v1/auth/signup',authController.singUpUser);
+router.post('/api/v1/auth/signup',authController.singUpUser);//create account user - sing up
+router.post('/api/v1/auth/singin',authController.singInUser);//sign in
+
 export default router;
 
