@@ -3,6 +3,7 @@ import bycrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import User from "../models/user.model";
 import config from "../config/config";
+
 export const singUpUser : RequestHandler = async (req,res) => {
   try{
     //genSalt = call the algorithm and how many times we are going to apply the algorithm
