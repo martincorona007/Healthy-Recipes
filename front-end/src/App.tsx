@@ -7,6 +7,9 @@ function App() {
     <>
       <Header/>
       <div className="page-container">
+        <div className="container">
+          Landing
+        </div>
 
       </div>
       <Footer/>
