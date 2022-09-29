@@ -1,6 +1,6 @@
 # Healthy-Recipes front end
 ##In Progress
 ### Header
-![Screenshot](s1.png)
+![image description](s1.png)
 ### Footer
-![Screenshot](s2.png)
+![image description](s2.png)
