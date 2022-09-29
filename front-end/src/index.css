@@ -14,6 +14,7 @@ code {
 .page-container{
   position: relative;
   min-height: 100vh;
+  background: linear-gradient(0deg, #ffffff 5%, #c5e1d4 100%);
 }
 .color-a{
   border: 1px solid red;
@@ -29,7 +30,16 @@ code {
 .custom-search-button{
   border-radius: 0px 30px 30px 0px !important;
 }
-
+/*Footer ================================= */
+.background-section-a{
+  background: linear-gradient(180deg, #ffffff 5%, #EAECEF 100%);
+ /* background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(234,236,239,1) 50%); */
+}
+.image-logo-size{
+  height: 40px;
+  width: 40px;
+  border-radius: 26px;
+}
 /*================================= */
 /* XSmall devices*/
 @media (min-width: 319px) {

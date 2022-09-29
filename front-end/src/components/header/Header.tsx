@@ -4,7 +4,7 @@ function Header() {
 
   return (
     
-    <nav className="navbar navbar-expand-md bg-light">
+    <nav className="navbar navbar-expand-md navbar-success bg-success bg-opacity-25">
       <div className="container">
          <div className="row col-sm-12 col-md-2" >
               <img src={logo} alt="Logo" className="d-inline-block align-text-top size-image"></img>
@@ -34,16 +34,9 @@ function Header() {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">Link</a>
-            </li>
-            
+            </li>     
           </ul>
-
         </div>
-
-
-
-
-
       </div>
     </nav>
   )
