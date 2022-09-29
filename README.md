@@ -1,6 +1,6 @@
 # Healthy-Recipes front end
 ##In Progress
 ### Header
-![Alt text](s1.png?raw=true raw=true "Title")
+![Screenshot](s1.png)
 ### Footer
-![Alt text](s2.png?raw=true raw=true "Title")
+![Screenshot](s2.png)
