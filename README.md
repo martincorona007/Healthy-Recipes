@@ -1,6 +1,6 @@
 # Healthy-Recipes front end
-##In Progress
+## In Progress
 ### Header
-![image description](s1.png)
+<img src="s1.PNG" alt="mern" style="zoom: 67%;" />
 ### Footer
-![image description](s2.png)
+<img src="s2.PNG" alt="mern" style="zoom: 67%;" />
