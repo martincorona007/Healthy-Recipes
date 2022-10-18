@@ -22,6 +22,9 @@ code {
 .color-b{
   border: 1px solid blue ;
 }
+.color-c{
+  border: 1px solid rgb(94, 255, 0) ;
+}
 /*Header ================================= */
 
 .custom-search-input{
