@@ -1,5 +1,8 @@
 import React, {useState,useEffect, ChangeEvent,FormEvent} from "react"; 
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as authService from "../../services/auth"
+
 const initialState = {
   firstName: "",
   lastName: "",
@@ -8,7 +11,10 @@ const initialState = {
   password: "",
   confirmPassword: "" 
 }
+
 function Register(){
+
+  const changeRute = useNavigate();// change path
   const [user,setUser] = useState(initialState);
   const handlerInput = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({...user,[e.target.id]: e.target.value})
@@ -27,7 +33,18 @@ function Register(){
         password: user.password
         
       }).then((response: any)=> {
-        console.log("SUCCESS",response);
+        //console.log("SUCCESSsssin",response); 
+        toast.success("Account created", { 
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        changeRute("/")
       }).catch((response: any)=> {
         console.log("NOP",response)
       })      
@@ -39,7 +56,7 @@ function Register(){
     //console.log(user);
   },[])
   return(
-    <>
+  
       <div className="container">
         <div className="row">
           <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -83,7 +100,7 @@ function Register(){
           </div>
         </div>
       </div>
-    </>    
+    
   )
 }
 export default Register;

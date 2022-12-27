@@ -32,7 +32,7 @@ function Footer(){
           </div>
         </div>
         <div className="row pt-3" style={{'background': '#EAECEF', 'textAlign': 'center'}}>
-          <p>© 2022 Martin Corona. Design by <a className="ps-1" href="www.linkedin.com/in/martin-corona-a019a2169"> Martin Corona </a> </p>   
+          <p>© 2023 Martin Corona. Design by <a className="ps-1" href="https://martincorona007.github.io/links"> Martin Corona </a> </p>   
         </div>
      </div>
 
