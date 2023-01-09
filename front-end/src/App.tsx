@@ -8,6 +8,7 @@ import Header from './components/header/Header';
 import Landing from './components/landing/Landing';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
+import PreView from './components/recipe/PreView';
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Landing/>}/> 
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Register/>}/>
+          <Route path='/view' element={<PreView/>}/>
         </Routes>         
         </div>
       </div>
