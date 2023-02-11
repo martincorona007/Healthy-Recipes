@@ -1,28 +1,24 @@
-import React, {useState,useEffect, ChangeEvent,FormEvent} from "react"; 
+import { yupResolver } from "@hookform/resolvers/yup";
+import React, {useEffect} from "react"; 
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as authService from "../../services/auth"
 import { errorMessage,successMessage } from "../../shared/messages";
+import { schemaRegister } from "../../shared/schema";
+import { FormValuesRegister } from "../../shared/types";
 
-const initialState = {
-  firstName: "",
-  lastName: "",
-  user: "",
-  email: "",
-  password: "",
-  confirmPassword: "" 
-}
+
 
 function Register(){
 
   const changeRute = useNavigate();// change path
-  const [user,setUser] = useState(initialState);
-  const handlerInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser({...user,[e.target.id]: e.target.value})
-  }
-  const handlerForm = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); 
-    console.log(e)
-    console.log(user)
+
+
+  const formOptions = { resolver: yupResolver(schemaRegister) };
+  const { register,handleSubmit,formState: { errors }, } = useForm<FormValuesRegister>(formOptions);
+
+  const handlerForm = async (user: FormValuesRegister) => {
+    //console.log(user)
 
     try {
       await authService.signUp({
@@ -58,30 +54,51 @@ function Register(){
             <div className="card border-0 shadow rounded-3 my-5">
               <div className="card-body p-4 p-sm-5">
                 <h5 className="card-title text-center mb-5 fw-light fs-5">Sing Up</h5>
-                <form onSubmit={handlerForm}>
+                <form onSubmit={handleSubmit(handlerForm)}>
                   <div className="form-floating mb-3">
-                    <input type="text" className="form-control" id="firstName" placeholder="namesa" aria-describedby="user" value={user.firstName} onChange={handlerInput}/>
+                    <input type="text"  className={`form-control ${
+                      errors.firstName ? "is-invalid" : ""
+                    }`} id="firstName" {...register("firstName")} placeholder="First Name"  />
                     <label >First Name</label>
+                    <div id="firstName">
+                      <p className="color-validation">{errors.firstName?.message}</p>
+                    </div>
                   </div>
                   <div className="form-floating mb-3">
-                    <input type="text" className="form-control" id="lastName" placeholder="namesa" aria-describedby="user" value={user.lastName} onChange={handlerInput}/>
+                    <input type="text" className={`form-control ${errors.lastName ? "is-invalid" : ""}`} id="lastName" {...register("lastName")} placeholder="Last Name"  />
                     <label >Last Name</label>
+                    <div id="lastName">
+                      <p className="color-validation">{errors.lastName?.message}</p>
+                    </div>
                   </div>
                   <div className="form-floating mb-3">
-                    <input type="text" className="form-control" id="user" placeholder="namesa" aria-describedby="user" value={user.user} onChange={handlerInput}/>
-                    <label >User</label>
+                    
+                    <input type="text" className={`form-control ${errors.user ? "is-invalid" : ""}`} id="user" {...register("user")} placeholder="User" />
+                    <label >@User</label>
+                    <div id="user">
+                      <p className="color-validation">{errors.user?.message}</p>
+                    </div>
                   </div>
                   <div className="form-floating mb-3">
-                    <input type="text" className="form-control" id="email" placeholder="name@example.com" value={user.email} onChange={handlerInput}/>
+                    <input type="text" className={`form-control ${ errors.email ? "is-invalid" : "" }`} id="email" {...register("email")} placeholder="name@example.com" />
                     <label >Email address</label>
+                    <div id="email">
+                      <p className="color-validation">{errors.email?.message}</p>
+                    </div>
                   </div>
                   <div className="form-floating mb-3">
-                    <input type="password" className="form-control" id="password" placeholder="Password" value={user.password} onChange={handlerInput}/>
+                    <input type="password" className={`form-control ${ errors.password ? "is-invalid" : "" }`} id="password" {...register("password")} placeholder="Password" />
                     <label>Password</label>
+                    <div id="password">
+                      <p className="color-validation">{errors.password?.message}</p>
+                    </div>
                   </div>
                   <div className="form-floating mb-3">
-                    <input type="password" className="form-control" id="confirmPassword" placeholder="Confirm Password"value={user.confirmPassword} onChange={handlerInput}/>
+                    <input type="password"  className={`form-control ${ errors.confirmPassword ? "is-invalid" : "" }`} id="confirmPassword" {...register("confirmPassword")} placeholder="Confirm Password"/>
                     <label>Confirm Password</label>
+                    <div id="confirmPassword">
+                      <p className="color-validation">{errors.confirmPassword?.message}</p>
+                    </div>
                   </div>
                   <hr className="my-4"/>
                   <div className="d-grid">
