@@ -1,23 +1,21 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { IUserAuth } from "../../interfaces/IUser";
+import { useForm } from "react-hook-form";
 import * as userService from "../../services/auth";
-import { toast } from "react-toastify";
-import { errorMessage,successMessage } from "../../shared/messages";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { errorMessage } from "../../shared/messages";
+import { schemaLogin } from "../../shared/schema";
+import { FormValuesLogin } from "../../shared/types";
+
 function Login() {
 
-  const initialState = {
-    email: "",
-    password: "",
-  }
-  const [user, setUser] = useState<IUserAuth>(initialState);
-  const handlerInput = (e: ChangeEvent<HTMLInputElement>) => {
-   // console.log(e.target.name)
-    setUser({ ...user, [e.target.name]: e.target.value })
-  }
-  const handlerForm = async(e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(user);
-    userService.signIn(user).then((response: any)=> {
+  
+  const formOptions = { resolver: yupResolver(schemaLogin) };
+  const {register,handleSubmit,formState: { errors },} = useForm<FormValuesLogin>(formOptions);
+ 
+  const handlerForm = (data: FormValuesLogin) => {
+    
+    console.log(data);
+    userService.signIn(data).then((response: any)=> {
       console.log("YEs ",response)
       
     }).catch((e: any)=> {
@@ -39,14 +37,20 @@ function Login() {
           <div className="card border-0 shadow rounded-3 my-5">
             <div className="card-body p-4 p-sm-5">
               <h5 className="card-title text-center mb-5 fw-light fs-5">Log In</h5>
-              <form onSubmit={handlerForm}>
+              <form onSubmit={handleSubmit(handlerForm)}>
                 <div className="form-floating mb-3">
-                  <input type="email" name="email" className="form-control" placeholder="name@example.com" onChange={handlerInput}  />
+                  <input type="email" className={`form-control ${errors.email ? "is-invalid" : "" }`} id="email" {...register("email")} />
                   <label >Email address</label>
+                  <div id="email">
+                    <p className="color-validation">{errors.email?.message}</p>
+                  </div>
                 </div>
                 <div className="form-floating mb-3">
-                  <input type="password" name="password" className="form-control" placeholder="Password" onChange={handlerInput}  />
+                  <input type="password" className={`form-control ${ errors.password ? "is-invalid" : ""}`} id="password"{...register("password")}/>
                   <label>Password</label>
+                  <div id="password">
+                    <p className="color-validation">{errors.password?.message}</p>
+                  </div>
                 </div>
 
                 <hr className="my-4" />
