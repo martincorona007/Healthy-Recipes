@@ -2,6 +2,7 @@ import React, {useState,useEffect, ChangeEvent,FormEvent} from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as authService from "../../services/auth"
+import { errorMessage,successMessage } from "../../shared/messages";
 
 const initialState = {
   firstName: "",
@@ -34,19 +35,14 @@ function Register(){
         
       }).then((response: any)=> {
         //console.log("SUCCESSsssin",response); 
-        toast.success("Account created", { 
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        
+        successMessage(response.data.message);
         changeRute("/")
-      }).catch((response: any)=> {
-        console.log("NOP",response)
+      }).catch((e: any)=> {
+        //console.log("> ",e.response.data.message)
+        if (e.response.data.message) {
+          errorMessage(e.response.data.message);
+        }
       })      
     } catch (error) {
       console.log(error)

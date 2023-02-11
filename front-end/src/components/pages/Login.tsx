@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { IUserAuth } from "../../interfaces/IUser";
 import * as userService from "../../services/auth";
 import { toast } from "react-toastify";
+import { errorMessage,successMessage } from "../../shared/messages";
 function Login() {
 
   const initialState = {
@@ -10,7 +11,7 @@ function Login() {
   }
   const [user, setUser] = useState<IUserAuth>(initialState);
   const handlerInput = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.name)
+   // console.log(e.target.name)
     setUser({ ...user, [e.target.name]: e.target.value })
   }
   const handlerForm = async(e: FormEvent<HTMLFormElement>) => {
@@ -18,19 +19,13 @@ function Login() {
     console.log(user);
     userService.signIn(user).then((response: any)=> {
       console.log("YEs ",response)
-      toast.success("Success login", { 
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-    }).catch((response: any)=> {
-      console.log("NEL ",response);
+      
+    }).catch((e: any)=> {
+      
+     if (e.response.data.message) {
+      errorMessage(e.response.data.message);
+     }
+      
     })
   }
   useEffect(() => {
