@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
 import { logOut } from "../../redux/reducers/profile";
+import { removeCookie } from "../../shared/utils";
 function CaseA() {
   const changeRoute = useNavigate();
   const dispatch = useDispatch(); //update redux
@@ -9,6 +10,8 @@ function CaseA() {
     
     dispatch(logOut({ currentUser: "", isLoggedIn: false, token: "" }));
     changeRoute("/");
+    removeCookie("user");
+    removeCookie("token");
   }
   return (
     <div className="navbar-nav">
