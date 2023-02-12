@@ -1,10 +1,11 @@
 //store.js - where all states are stored
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from '../redux/reducers/profile'
-
+import userReducer from '../redux/reducers/profile';
+import recipeReducer from '../redux/reducers/viewRecipe'
+import userSearch from '../redux/reducers/search';
 //configureStore API
 export const store = configureStore({
-  reducer: { login: userReducer}
+  reducer: { login: userReducer,search: userSearch, recipe: recipeReducer}
   
 })
 

@@ -14,16 +14,22 @@ import Account from './components/pages/Account';
 import { getCookie } from './shared/utils';
 import { logIn } from './redux/reducers/profile';
 import { useDispatch } from 'react-redux';
+import { readRecipe } from './redux/reducers/viewRecipe';
 function App() {
+  const recipeView = useAppSelector((state) => state.recipe); //read the recipe clicked
+
   const userSession = useAppSelector((state) => state.login); //read the user logged 
   const dispatch = useDispatch(); 
   const userCookie = getCookie("user");
+  
+  let isView = true;
   //console.log("STG? ",userCookie);
   useEffect(()=> {
     if(!(userCookie === "" || userCookie === null)){
       const token = getCookie("token")
       dispatch(logIn({currentUser: userCookie,isLoggedIn: true,token:token}))
-     }
+    }
+  
   },[userCookie])
   return (
     <BrowserRouter>
@@ -34,7 +40,10 @@ function App() {
         <div className="container">
         <Routes>
           <Route path="/" element={<Landing/>}/> 
-          <Route path='/view' element={<PreView/>}/>
+          {//
+            recipeView.recipe!== ""  && (<Route path='/view' element={<PreView/>}/>)
+          }
+         
           {//procted the routes when the user sing in
             userSession.isLoggedIn === true && (<Route path="/account-details" element={<Account />} />)
           }

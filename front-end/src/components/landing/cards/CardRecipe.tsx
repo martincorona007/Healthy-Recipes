@@ -1,13 +1,20 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { readRecipe } from "../../../redux/reducers/viewRecipe";
+import { setCookie } from "../../../shared/utils";
 import PreView from "../../recipe/PreView";
 export default function CardRecipe({recipes}: any){
 
   const changeRoute = useNavigate(); //change of enrutador
-
+  const dispatch = useDispatch(); //update redux
+  
   const handlerViewRecipe = (element: any) => {
     //console.log("EL ",element._links.self.href);
-    
+  
+    //console.log("save ",);
+    setCookie("recipe",element._links.self.href.substring(38,element._links.self.href.lastIndexOf("?")))
+    dispatch(readRecipe({ recipe: element }));
     changeRoute("/view")
   }
   

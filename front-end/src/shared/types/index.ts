@@ -11,3 +11,6 @@ export type FormValuesRegister = {
   password: string;
   confirmPassword: string;
 };
+export type FormValuesInput = {
+  inputSearch: string;
+};

@@ -21,4 +21,7 @@ const schemaRegister = yup.object().shape({
     .required("Confirm Password is required")
     .oneOf([yup.ref("password")], "Passwords must match"),
 });
-export {schemaLogin,schemaRegister}
+const schemaInput = yup.object().shape({
+  inputSearch: yup.string().required(),
+});
+export {schemaLogin,schemaRegister,schemaInput}

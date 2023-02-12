@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { readRecipe } from "../../redux/reducers/viewRecipe";
 import * as recipeService from "../../services/recipe"
-function PreView({data}: any){
-  console.log("OUTS ",data)
+import { useAppSelector } from "../../shared/hooks";
+import { getCookie } from "../../shared/utils";
+function PreView(){
   
   const [recipe,setRecipe] = useState<any>([]);
-  
-  const getInfo= async () => {
-    recipeService.getRecipe("https://api.edamam.com/api/recipes/v2/bbb9b43ff5959d3ae12cd6a43107cd4e?type=public&app_id=9f27dc3a&app_key=71d0a788bfd813779105487462aab605")
-    .then((response: any) => {
-      console.log("PreView.tsx ",response)
-      setRecipe([response.data.recipe]);
-    })
-    .catch((e: Error) => {
-      console.log("Errorr ",e);
-    })
-  }
+  const dispatch = useDispatch(); //update redux
+  const recipeClicked = useAppSelector((state : any) => state.recipe); //read recipe clicked
+  const recipeView = useAppSelector((state) => state.recipe); //read the recipe clicked
+  // const getInfo= async () => {
+  //   recipeService.getRecipe(getCookie("recipe") || '').then((response: any) => {
+  //     console.log("PreView.tsx ",response)
+  //     dispatch(readRecipe({ recipe: response.data }));
+  //     setRecipe([response.data.recipe]);
+  //   }).catch((e: Error) => {
+  //     console.log("Errorr ",e);
+  //   })
+  // }
   const handlerSaveRecipe = (nameRecipe: React.MouseEvent<Element,MouseEvent>) => {
     console.log("Saved ",nameRecipe)
   }
   useEffect(()=>{
-    getInfo();
+  if(recipeClicked !== null){
+    setRecipe([recipeClicked.recipe.recipe]); 
+  }
+  // if(getCookie("recipe")!== "" && recipeClicked.recipe === '' ){
+  //   getInfo()
+  // }
+   
   },[])
   return(
     <div className="container pt-2">
