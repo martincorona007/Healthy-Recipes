@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom"
 import logo from '../../assets/logo_long.png'
+import { useAppSelector } from "../../shared/hooks";
+import CaseA from "./CaseA";
+import CaseB from "./CaseB";
 function Header() {
 
+  const userSession = useAppSelector((state) => state.login);
+  
+  console.log("USER => ",userSession)
   return (
 
     <nav className="navbar navbar-expand-md navbar-success bg-success bg-opacity-25">
@@ -24,18 +30,12 @@ function Header() {
         </form>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <div className="container">
-            <div className="navbar-nav ">
-              <li className="nav-item" >
-                <Link to="/login" className="nav-link active" aria-current="page" style={{ whiteSpace: "nowrap" }}>Log in</Link>
-
-              </li>
-              <li className="nav-item" >
-                <Link to="/signup" className="nav-link active" aria-current="page" style={{ whiteSpace: "nowrap" }}>Sign Up</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/my-recipes" className="nav-link active" aria-current="page" style={{ whiteSpace: "nowrap" }}> My Recipes</Link>
-              </li>
-            </div>
+            
+              {/*TRUE CASE user log in*/}
+              {userSession.isLoggedIn === true && (<CaseA/>)}
+              {/*FALSE CASE user log out*/}
+              {userSession.isLoggedIn === false && (<CaseB/>)}
+            
           </div>
         </div>
       </div>

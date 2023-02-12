@@ -5,19 +5,34 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { errorMessage } from "../../shared/messages";
 import { schemaLogin } from "../../shared/schema";
 import { FormValuesLogin } from "../../shared/types";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/reducers/profile";
+import { Types } from "../../redux/actions/types";
+import { useNavigate } from "react-router-dom";
+import { setCookie } from "../../shared/utils";
+
+
+
 
 function Login() {
-
-  
+  const changeRoute = useNavigate();
+  const dispatch = useDispatch(); 
   const formOptions = { resolver: yupResolver(schemaLogin) };
   const {register,handleSubmit,formState: { errors },} = useForm<FormValuesLogin>(formOptions);
  
   const handlerForm = (data: FormValuesLogin) => {
     
-    console.log(data);
     userService.signIn(data).then((response: any)=> {
-      console.log("YEs ",response)
+     
+      dispatch(logIn({
+        currentUser: response.data.user._id,
+        isLoggedIn: true,
+        token: response.data.token,
+      } ))
+      setCookie("user",response.data.user._id);
+      setCookie("token",response.data.token);
       
+      changeRoute("/");
     }).catch((e: any)=> {
       
      if (e.response.data.message) {
