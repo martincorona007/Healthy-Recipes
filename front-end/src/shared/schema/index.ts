@@ -24,4 +24,10 @@ const schemaRegister = yup.object().shape({
 const schemaInput = yup.object().shape({
   inputSearch: yup.string().required(),
 });
-export {schemaLogin,schemaRegister,schemaInput}
+const schemaAccount = yup.object().shape({
+  firstName: yup.string().required("First Name required"),
+  lastName: yup.string().required("Last Name required"),
+  user: yup.string().required("User required"),
+  email: yup.string().email().required(),
+});
+export {schemaLogin,schemaRegister,schemaInput,schemaAccount}

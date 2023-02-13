@@ -72,9 +72,13 @@ function Register(){
                     </div>
                   </div>
                   <div className="form-floating mb-3">
-                    
-                    <input type="text" className={`form-control ${errors.user ? "is-invalid" : ""}`} id="user" {...register("user")} placeholder="User" />
-                    <label >@User</label>
+                    <label className="form-label">User</label>
+                    <div className="input-group ">
+                      <span className="input-group-text" id="inputGroupPrepend3">
+                        @
+                      </span>                    
+                      <input type="text" className={`form-control ${errors.user ? "is-invalid" : ""}`} id="user" {...register("user")} placeholder="User" />
+                    </div>
                     <div id="user">
                       <p className="color-validation">{errors.user?.message}</p>
                     </div>

@@ -4,9 +4,9 @@ export interface IUser {
   lastName: string,
   user: string,
   email: string,
-  password: string,
+  password?: string,
   createdAt?: string,
-  updtedAt?: string,
+  updatedAt?: string,
 }
 export interface IUserAuth{
   email: string,

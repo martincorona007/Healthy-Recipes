@@ -19,6 +19,9 @@ function CaseA() {
         <Link to="/my-recipes" className="nav-link active" aria-current="page" style={{ whiteSpace: "nowrap" }}> My Recipes</Link>
       </li>
       <li className="nav-item">
+        <Link to="/account-details" className="nav-link active" aria-current="page" style={{ whiteSpace: "nowrap" }}>Account</Link>
+      </li>
+      <li className="nav-item">
         <a className="nav-link active" aria-current="page" style={{ whiteSpace: "nowrap" }} onClick={handlerLogOut}>Log out</a>
       </li>
     </div>

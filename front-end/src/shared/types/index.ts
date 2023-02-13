@@ -14,3 +14,9 @@ export type FormValuesRegister = {
 export type FormValuesInput = {
   inputSearch: string;
 };
+export type FormValuesAccount = {
+  firstName: string;
+  lastName: string;
+  user: string;
+  email: string;
+};
