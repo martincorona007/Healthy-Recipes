@@ -23,3 +23,7 @@ export const getUserListRecipes = (user: string,token: string) => {
 export const removeRecipe = (idRecipe: string,token: string) => {
    return axios.delete(`${process.env.REACT_APP_APIBACK}/api/v1/recipe/${idRecipe}`,{headers: contentAndAuthToken(token)})
 }
+export const nextPage = (nextPage: string) => {
+  console.log("--> newpage ",nextPage)
+  return  axios.get(`${nextPage}`,{headers: contentHeader()});
+}
