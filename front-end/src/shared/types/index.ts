@@ -1,4 +1,5 @@
 import React  from 'react';
+//get the data from user with data types
 export type FormValuesLogin = {
   email: string;
   password: string;

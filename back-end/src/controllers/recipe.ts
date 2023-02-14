@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import Recipe from '../models/recipe.model';
+import Recipe from '../models/recipe';
 
 export const saveRecipe : RequestHandler = async(req,res) => {
   try {
@@ -12,7 +12,6 @@ export const saveRecipe : RequestHandler = async(req,res) => {
       res.status(200).json({message: "Recipe saved"});
     }
   } catch (e: any) {
-    console.log("ERR ",e)
     return res.json(e);
   }
 }
@@ -22,7 +21,6 @@ export const getRecipes : RequestHandler = async (req,res) => {
     if(!recipeFound || recipeFound.length === 0) return res.status(404).json({message: "User not found"});
     return res.json(recipeFound);
   } catch (e: any) {
-    console.log("ERR ",e)
     return res.json(e);
   }
 }
@@ -33,7 +31,6 @@ export const removeRecipe :  RequestHandler = async (req,res) => {
     return res.status(200).json({message: "Recipe removed"})  
 
   } catch (e: any) {
-    console.log("ERR ",e)
     return res.json(e);
   }
 }

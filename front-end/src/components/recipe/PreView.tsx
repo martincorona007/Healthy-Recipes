@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { readRecipe } from "../../redux/reducers/viewRecipe";
 import * as recipeService from "../../services/recipe"
 import { useAppSelector } from "../../shared/hooks";
 import { successMessage, warningMessage } from "../../shared/messages";
-import { getCookie } from "../../shared/utils";
+
 function PreView(){
   
   const [recipe,setRecipe] = useState<any>([]);
-  const dispatch = useDispatch(); //update redux
-  const recipelinkClicked = useAppSelector((state) => state.recipe); 
   const recipeClicked = useAppSelector((state : any) => state.recipe); //read recipe clicked
   const userSession = useAppSelector((state) => state.login);
-  console.log("PreView ",recipeClicked)
+
   const getInfo= async () => {
     recipeService.getRecipe(recipeClicked.recipe).then((response: any) => {
-      console.log("PreView.tsx ",response)
-      //dispatch(readRecipe({ recipe: response.data }));
       setRecipe([response.data.recipe]);
     }).catch((e: Error) => {
-      console.log("Errorr ",e);
+    
     })
   }
   const handlerSaveRecipe = (nameRecipe: React.MouseEvent<Element,MouseEvent>) => {

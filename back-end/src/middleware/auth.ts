@@ -1,6 +1,6 @@
 import { Request,Response,NextFunction } from "express";
 import config from "../config/config";
-import User from "../models/user.model";
+import User from "../models/user";
 import jwt from 'jsonwebtoken';
 
 const duplicateEmail = async(request: Request,response: Response,next: NextFunction) => {

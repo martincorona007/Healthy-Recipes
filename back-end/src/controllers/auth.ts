@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import bycrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
-import User from "../models/user.model";
+import User from "../models/user";
 import config from "../config/config";
 
 export const singUpUser : RequestHandler = async (req,res) => {

@@ -12,8 +12,6 @@ import { FormValuesRegister } from "../../shared/types";
 function Register(){
 
   const changeRute = useNavigate();// change path
-
-
   const formOptions = { resolver: yupResolver(schemaRegister) };
   const { register,handleSubmit,formState: { errors }, } = useForm<FormValuesRegister>(formOptions);
 
@@ -29,18 +27,16 @@ function Register(){
         password: user.password
         
       }).then((response: any)=> {
-        //console.log("SUCCESSsssin",response); 
         
         successMessage(response.data.message);
         changeRute("/")
       }).catch((e: any)=> {
-        //console.log("> ",e.response.data.message)
         if (e.response.data.message) {
           errorMessage(e.response.data.message);
         }
       })      
     } catch (error) {
-      console.log(error)
+      
     }
   }
   useEffect(()=>{

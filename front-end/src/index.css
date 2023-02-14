@@ -43,6 +43,9 @@ code {
   width: 40px;
   border-radius: 26px;
 }
+.color-validation{
+  color: red;
+}
 /*================================= */
 /* XSmall devices*/
 @media (min-width: 319px) {

@@ -8,7 +8,9 @@ import { errorMessage, successMessage } from "../../shared/messages";
 import { schemaAccount } from "../../shared/schema";
 import { FormValuesAccount } from "../../shared/types";
 import * as userService from "../../services/user"
+
 function Account(){
+
   const userSession = useAppSelector((state) => state.login); 
   const initialState = {firstName: "",lastName: "",user: "",email: "",};
   const [user, setUser] = useState<IUser>(initialState);
@@ -18,7 +20,6 @@ function Account(){
   const handlerForm = async (data: FormValuesAccount) => {
     await userService.updateAccountUser(userSession.currentUser, user, userSession.token)
       .then((response: any) => {
-      
         successMessage("Account updated");
       })
       .catch((e: any) => {
@@ -32,8 +33,7 @@ function Account(){
   };
   const getUserData = async () => {
     await userService.getUserInformation(userSession.currentUser, userSession.token)
-      .then((response: any) => {
-       
+      .then((response: any) => {   
         setUser({
           firstName: response.data.firstName,
           lastName: response.data.lastName,
@@ -47,7 +47,7 @@ function Account(){
           email: response.data.email,
         });
       })
-      .catch((e: Error) => console.log("NEL ", e));
+      .catch((e: Error) =>{ } );
   };
   useEffect(()=>{
     getUserData();

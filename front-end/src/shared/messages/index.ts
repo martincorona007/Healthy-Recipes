@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-
+//message in every case scenario
 const successMessage = (message: string) => {
   toast.success(`${message}`, {
     position: "top-right",

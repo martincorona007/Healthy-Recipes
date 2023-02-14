@@ -10,7 +10,6 @@ function Footer(){
     <>
      <div className="container-fluid" >
         <div className="row background-section-a pt-3">
-        
           <div className="col-sm  d-flex align-items-center"> 
             <div className="col d-flex justify-content-around">
               <a href="https://www.instagram.com/"><img className="image-logo-size" src={instagram} /></a>
@@ -26,8 +25,6 @@ function Footer(){
             <input className="form-control me-2"  placeholder="Email address" aria-label="Search"/>
             <button className="btn btn-outline-success" type="submit">Suscribe</button>
             </form>
-            
-
           </div>
           </div>
         </div>
@@ -35,7 +32,6 @@ function Footer(){
           <p>© 2023 Martin Corona. Design by <a className="ps-1" href="https://martincorona007.github.io/links"> Martin Corona </a> </p>   
         </div>
      </div>
-
     </>
   )
 }

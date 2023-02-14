@@ -11,10 +11,8 @@ import { Types } from "../../redux/actions/types";
 import { useNavigate } from "react-router-dom";
 import { setCookie } from "../../shared/utils";
 
-
-
-
 function Login() {
+
   const changeRoute = useNavigate();
   const dispatch = useDispatch(); 
   const formOptions = { resolver: yupResolver(schemaLogin) };

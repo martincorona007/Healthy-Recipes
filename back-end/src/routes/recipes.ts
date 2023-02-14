@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as recipeController from '../controllers/recipe.controller';
+import * as recipeController from '../controllers/recipe';
 import { verifyToken } from "../middleware/auth";
 const router = Router();
 

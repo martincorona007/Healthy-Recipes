@@ -14,19 +14,16 @@ import Account from './components/pages/Account';
 import { getCookie } from './shared/utils';
 import { logIn } from './redux/reducers/profile';
 import { useDispatch } from 'react-redux';
-import { readRecipe } from './redux/reducers/viewRecipe';
 import Myrecipes from './components/my-recipes/MyRecipes';
 function App() {
-  const recipeView = useAppSelector((state) => state.recipe); //read the recipe clicked
 
+  const recipeView = useAppSelector((state) => state.recipe); //read the recipe clicked
   const userSession = useAppSelector((state) => state.login); //read the user logged 
   const dispatch = useDispatch(); 
   const userCookie = getCookie("user");
-  
-  let isView = true;
-  //console.log("STG? ",userCookie);
+
   useEffect(()=> {
-    if(!(userCookie === "" || userCookie === null)){
+    if(!(userCookie === "" || userCookie === null)){//save user after reload, case false will become true, and case true will become false (FOR OVOID WRITTING LONG CODE)
       const token = getCookie("token")
       dispatch(logIn({currentUser: userCookie,isLoggedIn: true,token:token}))
     }
@@ -41,7 +38,7 @@ function App() {
         <div className="container">
         <Routes>
           <Route path="/" element={<Landing/>}/> 
-          {//
+          {//protect view route
             recipeView.recipe!== ""  && (<Route path='/view' element={<PreView/>}/>)
           }          
           {//procted the routes when the user sing in
@@ -51,7 +48,7 @@ function App() {
             userSession.isLoggedIn === false && (<><Route path='/login' element={<Login />} /><Route path='/signup' element={<Register />} /></>)   
           }
           {//Protect the route until the user is logged in
-                userSession.isLoggedIn && (<Route path="/my-recipes" element={<Myrecipes />} />) 
+            userSession.isLoggedIn && (<Route path="/my-recipes" element={<Myrecipes />} />) 
           }
           <Route path="*" element={<Landing />} />
         </Routes> 

@@ -18,40 +18,37 @@ function ListRecipes() {
   const getRecipesUser = async () => {
     recipeService.getUserListRecipes(userSession.currentUser,userSession.token)
       .then((response: any) => {
-        console.log("RESPONSE 1 LIST ", response);
         setList(response.data);
         setStatus(false);//when there is a recipe saved the message "No recipes yet" its hidden.
         
       })
       .catch((error: Error) => {
         setStatus(true);
-        console.log("NEL1", error);
       });
   };
+
   const handlerCheckOut = (e: React.MouseEvent) => {
     dispatch(readRecipe({ recipe: e }));
     changeRoute("/view");
   };
 
-  
-
   const handlerRemove = async(idRecipe: any) => {
     await recipeService.removeRecipe(idRecipe,userSession.token)
       .then((response: any) => {
-        console.log("RESPONSE 2 LIST ", response);
         successMessage("Recipe removed")
        
       })
       .catch((e: Error) => {
         setStatus(true);
-        console.log("NEL2 ", e);
       });
       getRecipesUser();//load the recipes
     
   };
+  
   useEffect(() => {
     getRecipesUser();
   }, []);
+
   return (
     <div style={{ paddingBottom: "20px" }} className="container">
       <h5 className="">List of recipes</h5>

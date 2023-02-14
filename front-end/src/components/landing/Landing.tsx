@@ -7,8 +7,7 @@ import * as recipeService from "../../services/recipe"
 function Landing(){
 
   const [recipes,setRecipes] = useState([])
-  const [pages,setPages] = useState([]);
-  console.log("pages ",pages)
+ 
   const histories = useAppSelector((state) => state.search); //read the input data from header, and get the value
   const [next, setNext] = useState("");//get link for new set {1..20} of recipes
   
@@ -22,25 +21,24 @@ function Landing(){
       setFound(true);//remove warnings
     }).catch((e: Error)=> {
       setFound(false);//remove warnings
-      console.log(e);
     })
   }
   const handlerNextPage = () => {
     recipeService
       .nextPage(next)
       .then((response: any) => {
-        console.log("from next page ",response)
+      //console.log("from next page ",response)
         setRecipes(response.data.hits);
         setNext(response.data._links.next.href);
       })
       .catch((e: Error) => {
-        console.log("nel ", e);
+      //  console.log("nel ", e);
       });
 
   };
   useEffect(()=> {
     getDataSetRecipes();
-    console.log("useEffect activated");
+    //console.log("useEffect activated");
 
   },[newSearch])
   return(

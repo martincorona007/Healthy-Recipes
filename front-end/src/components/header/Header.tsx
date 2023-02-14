@@ -17,10 +17,8 @@ function Header() {
   const userSession = useAppSelector((state) => state.login);//read the user logged in
   const searchInputRecipe = { resolver: yupResolver(schemaInput) };
   const {register,handleSubmit,formState: { errors },} = useForm<FormValuesInput>(searchInputRecipe);//form validation
-  //console.log("USER => ",userSession)
   const handlerSearch = async (e: FormEvent<HTMLFormElement> | any) => {
     if (!(e.inputSearch === "")) {//add search bar functionality
-      console.log("writting ",e.inputSearch)
       dispatch(searchRecipe({ searchStack: e.inputSearch }));
       // changeRoute("/")
     }
@@ -42,16 +40,13 @@ function Header() {
             <input className={`form-control ms-2 border-success custom-search-input color-b ${ errors.inputSearch ? "is-invalid" : "" }`}  type="search" placeholder="Search" aria-label="Search" {...register("inputSearch")}></input>
             <button className="btn btn-success custom-search-button" type="submit">Search</button>
           </div>
-
         </form>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <div className="container">
-            
               {/*TRUE CASE user log in*/}
               {userSession.isLoggedIn === true && (<CaseA/>)}
               {/*FALSE CASE user log out*/}
               {userSession.isLoggedIn === false && (<CaseB/>)}
-            
           </div>
         </div>
       </div>
