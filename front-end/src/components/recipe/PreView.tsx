@@ -1,33 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { readRecipe } from "../../redux/reducers/viewRecipe";
 import * as recipeService from "../../services/recipe"
 import { useAppSelector } from "../../shared/hooks";
+import { successMessage, warningMessage } from "../../shared/messages";
 import { getCookie } from "../../shared/utils";
 function PreView(){
   
   const [recipe,setRecipe] = useState<any>([]);
   const dispatch = useDispatch(); //update redux
+  const recipelinkClicked = useAppSelector((state) => state.recipe); 
   const recipeClicked = useAppSelector((state : any) => state.recipe); //read recipe clicked
-  const recipeView = useAppSelector((state) => state.recipe); //read the recipe clicked
-  // const getInfo= async () => {
-  //   recipeService.getRecipe(getCookie("recipe") || '').then((response: any) => {
-  //     console.log("PreView.tsx ",response)
-  //     dispatch(readRecipe({ recipe: response.data }));
-  //     setRecipe([response.data.recipe]);
-  //   }).catch((e: Error) => {
-  //     console.log("Errorr ",e);
-  //   })
-  // }
+  const userSession = useAppSelector((state) => state.login);
+  console.log("PreView ",recipeClicked)
+  const getInfo= async () => {
+    recipeService.getRecipe(recipeClicked.recipe).then((response: any) => {
+      console.log("PreView.tsx ",response)
+      //dispatch(readRecipe({ recipe: response.data }));
+      setRecipe([response.data.recipe]);
+    }).catch((e: Error) => {
+      console.log("Errorr ",e);
+    })
+  }
   const handlerSaveRecipe = (nameRecipe: React.MouseEvent<Element,MouseEvent>) => {
-    console.log("Saved ",nameRecipe)
+    recipeService.saveRecipe({ user: userSession.currentUser,recipeLink: recipeClicked.recipe,recipeName: nameRecipe,},userSession.token)
+      .then((response: any) => {
+        successMessage(response.data.message);
+      })
+      .catch((e: any) => {
+        if (e.response.data.message) {
+          warningMessage(e.response.data.message);
+        }
+      }
+      );
   }
+
   useEffect(()=>{
-  if(recipeClicked !== null){
-    setRecipe([recipeClicked.recipe.recipe]); 
-  }
+    getInfo()
+  // if(recipeClicked !== null){
+  //   setRecipe([recipeClicked.recipe.recipe]); 
+  // }
   // if(getCookie("recipe")!== "" && recipeClicked.recipe === '' ){
-  //   getInfo()
+  //   
   // }
    
   },[])
@@ -55,7 +70,19 @@ function PreView(){
                         </div>
                         <hr></hr>
                         <div className="align-end">
-                          <button className="btn btn-primary" type="button" onClick={()=> handlerSaveRecipe(element.label)}>Save recipe</button>
+                          {userSession.isLoggedIn === true && (
+                            <button type="button" className="btn btn-primary"onClick={() => handlerSaveRecipe(element.label)}>
+                              Save recipe
+                            </button>
+                          )}
+                          {userSession.isLoggedIn === false && (
+                            <Link to="/login">
+                              <button type="button" className="btn btn-primary">
+                                Log in to save
+                              </button>
+                            </Link>
+                          )}
+                            
                         </div>
                       </div>    
                     </div>

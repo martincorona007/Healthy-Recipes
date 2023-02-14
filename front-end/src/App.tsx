@@ -15,6 +15,7 @@ import { getCookie } from './shared/utils';
 import { logIn } from './redux/reducers/profile';
 import { useDispatch } from 'react-redux';
 import { readRecipe } from './redux/reducers/viewRecipe';
+import Myrecipes from './components/my-recipes/MyRecipes';
 function App() {
   const recipeView = useAppSelector((state) => state.recipe); //read the recipe clicked
 
@@ -42,13 +43,15 @@ function App() {
           <Route path="/" element={<Landing/>}/> 
           {//
             recipeView.recipe!== ""  && (<Route path='/view' element={<PreView/>}/>)
-          }
-         
+          }          
           {//procted the routes when the user sing in
             userSession.isLoggedIn === true && (<Route path="/account-details" element={<Account />} />)
           }
           {//procted the routes when the user log out
             userSession.isLoggedIn === false && (<><Route path='/login' element={<Login />} /><Route path='/signup' element={<Register />} /></>)   
+          }
+          {//Protect the route until the user is logged in
+                userSession.isLoggedIn && (<Route path="/my-recipes" element={<Myrecipes />} />) 
           }
           <Route path="*" element={<Landing />} />
         </Routes> 

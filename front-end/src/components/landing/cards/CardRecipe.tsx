@@ -13,8 +13,8 @@ export default function CardRecipe({recipes}: any){
     //console.log("EL ",element._links.self.href);
   
     //console.log("save ",);
-    setCookie("recipe",element._links.self.href.substring(38,element._links.self.href.lastIndexOf("?")))
-    dispatch(readRecipe({ recipe: element }));
+    //setCookie("recipe",element._links.self.href.substring(38,element._links.self.href.lastIndexOf("?")))
+    dispatch(readRecipe({ recipe: element._links.self.href.substring(38,element._links.self.href.lastIndexOf("?")) }));
     changeRoute("/view")
   }
   

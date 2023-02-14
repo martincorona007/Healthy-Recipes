@@ -6,7 +6,7 @@ export interface IUser {
   email: string,
   password?: string,
   createdAt?: string,
-  updatedAt?: string,
+  updtedAt?: string,
 }
 export interface IUserAuth{
   email: string,

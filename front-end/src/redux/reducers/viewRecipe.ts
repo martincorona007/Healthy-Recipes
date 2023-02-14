@@ -11,6 +11,7 @@ export const recipeSlice = createSlice({
   initialState,
   reducers: {
     readRecipe: (state,action)=> {
+      console.log("recipeSlice ",action.payload.recipe)
       state.recipe = action.payload.recipe 
     }
   }
