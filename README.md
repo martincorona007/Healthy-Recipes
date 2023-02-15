@@ -53,15 +53,15 @@ Healthy Recipes is a saving and discovery of information on recipes from diferen
 
 ## Screenshots
 
-<img src="p1.PNG" alt="p1.PNG" style="zoom: 67%;" />
-
-<img src="p2.PNG" alt="p2.PNG" style="zoom: 67%;" />
-
-<img src="p3.PNG" alt="p3.PNG" style="zoom: 67%;" />
+<img src="p5.PNG" alt="p5.PNG" style="zoom: 67%;" />
 
 <img src="p4.PNG" alt="p4.PNG" style="zoom: 67%;" />
 
-<img src="p5.PNG" alt="p5.PNG" style="zoom: 67%;" />
+<img src="p3.PNG" alt="p3.PNG" style="zoom: 67%;" />
+
+<img src="p2.PNG" alt="p2.PNG" style="zoom: 67%;" />
+
+<img src="p1.PNG" alt="p1.PNG" style="zoom: 67%;" />
 
 #### Header
 <img src="s1.PNG" alt="header.PNG" style="zoom: 67%;" />
