@@ -3,7 +3,7 @@
 
 Healthy Recipes is a saving and discovery of information on recipes from diferent sources. All in One place.
 
-##UX/UI
+## UX/UI
 * PowerPoint
 
 ## Front End
