@@ -32,7 +32,9 @@ function Login() {
       
       changeRoute("/");
     }).catch((e: any)=> {
-      
+      if (e.response.data.message) {
+        errorMessage(e.response.data.message);
+      }
      
       
     })
